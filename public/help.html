@@ -1,334 +1,398 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
-    <link href="css/app.css" rel="stylesheet">
-    <!-- Alpine Plugins -->
-    <script src="js/alpine.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard</title>
+  <link href="css/app.css" rel="stylesheet">
+  <!-- Alpine Plugins -->
+  <script src="js/alpine.js"></script>
 </head>
-    <body >
-        <main>
-            <section class="flex bg-gray-100 max-w-screen-2xl mx-auto " x-data="{panel:false, menu:true}">
-                <div class="flex flex-col bg-indigo  rounded-l-lg p-2" :class="{' md:flex md:flex-col': window.outerWidth > 768}">
-                    <a href="#" class="inline-flex items-center justify-center  h-20 w-full">
-                        <svg class="h-12 w-12 text-white" fill="currentColor" version="1.1" viewBox="0 0 215 215" stroke="none" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:osb="http://www.openswatchbook.org/uri/2009/osb" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
-                            <title>Company logo</title>
-                            <path transform="matrix(1.28 0 0 1.28 13.057 10.462)" d="m121.65 15.95-11.2 11.2q-5.9-4.75-12.8-7.3-5.7-2.35-10.05-3.15v-16.7h-22.8v16.35l-6.9 1.75q-8.1 2.55-16.15 7.5l-11.6-11.65-15.95 15.75 11.8 11.65q-6.1 8.85-8.85 19.65l-0.8 4.55h-16.35v21.65h16.75l2.15 7.45q2.35 7.9 7.3 14.4l-12 11.6 15.35 15.35 12-11.8 6.5 3.95q8.85 4.3 16.75 5.7v16.15h22.8v-16.55q8.05-1.8 15.75-5.7l5.55-3.35 11.4 11.4 16.15-16.15-11.25-11.4q5.1-7.85 7.5-16.9l1.2-4.15h16.1v-21.65h-15.75q-1.55-8.5-4.5-15.35l-3.55-5.9 12-12.05-16.55-16.3m-7.65 58.85q-0.05 15.9-11.25 27.55-11.6 11-27.55 11-16.15 0-27.55-11.4-11.2-10.85-11.2-27.15 0-15.95 11.2-27.55 11.8-11.25 27.55-11.25 15.75 0 27.55 11.25 11.2 11.8 11.25 27.55" stroke-linecap="square" stroke-width="1"/>
-                            <path transform="matrix(.34872 0 0 .34872 83.818 78.7)" d="m144.75 65.137-94.088 94.088-50.662-50.663v-65.138l50.662 50.663 94.088-94.088v65.137"  stroke-linecap="square" stroke-width="6" />
-                        </svg>
-                        <span class="text-white text-4xl mx-2" x-show="menu">Logoipsum</span>
-                    </a>
-                    <div class="flex-grow flex flex-col justify-between text-gray-500">
-                        <nav class="flex flex-col mx-4 my-6 space-y-4">
-                            <a href="#" class="inline-flex items-center py-3 hover:text-gray-400 hover:bg-gray-700 focus:text-gray-400 focus:bg-gray-700 rounded-lg px-2" :class="{'justify-start': menu, 'justify-center': menu == false}">
-                                <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" />
-                                </svg>
-                                <span class="ml-2"  x-show="menu">Folders</span>
-                            </a>
-                            <a href="#" class="inline-flex items-center py-3 text-blue-600 bg-white rounded-lg px-2" :class="{'justify-start': menu, 'justify-center': menu == false}">
-                                <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                                </svg>
-                                <span class="ml-2"  x-show="menu">Dashboard</span>
-                            </a>
-                            <a href="#" class="inline-flex items-center py-3 hover:text-gray-400 hover:bg-gray-700 focus:text-gray-400 focus:bg-gray-700 rounded-lg px-2" :class="{'justify-start': menu, 'justify-center': menu == false}">
-                                <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                                </svg>
-                                <span class="ml-2"  x-show="menu">Messages</span>
-                            </a>
-                            <a href="#" class="inline-flex items-center py-3 hover:text-gray-400 hover:bg-gray-700 focus:text-gray-400 focus:bg-gray-700 rounded-lg px-2" :class="{'justify-start': menu, 'justify-center': menu == false}">
-                                <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
-                                </svg>
-                                <span class="ml-2"  x-show="menu">Documents</span>
-                            </a>
-                        </nav>
-                        <div class="flex justify-end">
-                            <a class="inline-flex p-3 hover:text-gray-400 justify-center border-gray-700 h-15 w-full border-t hover:bg-gray-700 focus:text-gray-400 focus:bg-gray-700 px-2">
-                                <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                </svg>
-                                <span class="ml-2"  x-show="menu">Settings</span>
-                            </a>
-                        </div>
-                    </div>
+
+<body x-data="{ page: 'sidebar',  'sidebarToggle': false, 'scrollTop': false, panel:false, menu:true}">
+  <!-- ===== Page Wrapper Start ===== -->
+  <div class="flex overflow-hidden max-w-screen-xl mx-auto">
+    <!-- ===== Sidebar Start ===== -->
+    <aside :class="sidebarToggle ? 'translate-x-0' : '-translate-x-full'"
+      class="absolute left-0 top-20 z-50 flex h-screen w-72 flex-col overflow-y-hidden bg-indigo duration-300 ease-linear dark:bg-boxdark lg:static lg:translate-x-0"
+      @click.outside="sidebarToggle = false">
+      <!-- SIDEBAR HEADER -->
+      <div class="flex items-center justify-between gap-2 px-6 py-5.5 lg:pt-10 text-white">
+        <p class="mb-4 ml-4 text-3xl font-medium text-white">Logoipsum</p>
+        <button class="block lg:hidden" @click.stop="sidebarToggle = !sidebarToggle">
+          <svg class="fill-current" width="20" height="18" viewBox="0 0 20 18" fill="none"
+            xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M19 8.175H2.98748L9.36248 1.6875C9.69998 1.35 9.69998 0.825 9.36248 0.4875C9.02498 0.15 8.49998 0.15 8.16248 0.4875L0.399976 8.3625C0.0624756 8.7 0.0624756 9.225 0.399976 9.5625L8.16248 17.4375C8.31248 17.5875 8.53748 17.7 8.76248 17.7C8.98748 17.7 9.17498 17.625 9.36248 17.475C9.69998 17.1375 9.69998 16.6125 9.36248 16.275L3.02498 9.8625H19C19.45 9.8625 19.825 9.4875 19.825 9.0375C19.825 8.55 19.45 8.175 19 8.175Z"
+              fill="" />
+          </svg>
+        </button>
+      </div>
+      <!-- SIDEBAR HEADER -->
+
+      <div class="no-scrollbar flex flex-col overflow-y-auto duration-300 ease-linear">
+        <!-- Sidebar Menu -->
+        <nav class="mt-5 py-4 px-4 lg:mt-9 lg:px-6 text-white" x-data="{selected: $persist('Dashboard')}">
+          <!-- Menu Group -->
+          <div>
+            <ul class="mb-6 flex flex-col gap-y-8">
+              <!-- Menu Item Dashboard -->
+              <li>
+                <a @click.stop="sidebarToggle = !sidebarToggle" class="flex gap-x-2 opacity-50 hover:opacity-100 duration-500" href="#">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z" />
+                  </svg>
+                  Dashboard</a>
+              </li>
+              <li>
+                <a @click.stop="sidebarToggle = !sidebarToggle" class="flex gap-x-2 opacity-50 hover:opacity-100 duration-500" href="#">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 00-10.026 0 1.106 1.106 0 00-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12" />
+                  </svg>
+                  Shipping</a>
+              </li>
+              <li>
+                <a @click.stop="sidebarToggle = !sidebarToggle" class="flex gap-x-2 opacity-50 hover:opacity-100 duration-500" href="#">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+                  </svg>
+                  Tracking</a>
+              </li>
+              <li>
+                <a @click.stop="sidebarToggle = !sidebarToggle" class="flex gap-x-2 opacity-50 hover:opacity-100 duration-500" href="#">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m3.75 9v6m3-3H9m1.5-12H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                  </svg>
+                  Add Shipment</a>
+              </li>
+              <li>
+                <a @click.stop="sidebarToggle = !sidebarToggle" class="flex gap-x-2 opacity-50 hover:opacity-100 duration-500" href="#">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C7.52232 2 3.77426 4.94289 2.5 9H5.5" stroke="#FFFFFF" stroke-width="1.5" stroke-linejoin="round"/>
+                    <path d="M12 7V12L14.5 14.5" stroke="#FFFFFF" stroke-width="1.5"/>
+                    <path d="M2 12C2 12.3373 2.0152 12.6709 2.04494 13M9 22C8.6584 21.8876 8.32471 21.7564 8 21.6078M3.20939 17C3.01655 16.6284 2.84453 16.2433 2.69497 15.8462M4.83122 19.3065C5.1369 19.6358 5.46306 19.9441 5.80755 20.2292" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="round"/>
+                  </svg>
+                  History</a>
+              </li>
+              <li>
+                <a @click.stop="sidebarToggle = !sidebarToggle" class="flex gap-x-2 opacity-50 hover:opacity-100 duration-500" href="#">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z" />
+                  </svg>
+                  Need Help?</a>
+              </li>
+              <li>
+                <a @click.stop="sidebarToggle = !sidebarToggle" class="flex gap-x-2 opacity-50 hover:opacity-100 duration-500" href="#">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.324.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 011.37.49l1.296 2.247a1.125 1.125 0 01-.26 1.431l-1.003.827c-.293.24-.438.613-.431.992a6.759 6.759 0 010 .255c-.007.378.138.75.43.99l1.005.828c.424.35.534.954.26 1.43l-1.298 2.247a1.125 1.125 0 01-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.57 6.57 0 01-.22.128c-.331.183-.581.495-.644.869l-.213 1.28c-.09.543-.56.941-1.11.941h-2.594c-.55 0-1.02-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 01-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 01-1.369-.49l-1.297-2.247a1.125 1.125 0 01.26-1.431l1.004-.827c.292-.24.437-.613.43-.992a6.932 6.932 0 010-.255c.007-.378-.138-.75-.43-.99l-1.004-.828a1.125 1.125 0 01-.26-1.43l1.297-2.247a1.125 1.125 0 011.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.087.22-.128.332-.183.582-.495.644-.869l.214-1.281z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                  </svg>
+                  Setting</a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+        <!-- Sidebar Menu -->
+
+      </div>
+    </aside>
+    <!-- ===== Sidebar End ===== -->
+
+      <!-- ===== Header Start ===== -->
+      <main class="sticky top-0 z-999 flex w-full bg-white drop-shadow-1 dark:bg-boxdark dark:drop-shadow-none">
+        <div class="flex-grow items-center justify-between  px-4 shadow-2 md:px-6 2xl:px-11 ">
+          <div class="flex items-center h-20  bg-white">
+            <div class="lg:hidden mx-5">
+              <!-- Hamburger Toggle BTN -->
+              <button
+                class="z-99999 block rounded-sm border border-stroke bg-white p-1.5 shadow-sm dark:border-strokedark dark:bg-boxdark lg:hidden"
+                @click.stop="sidebarToggle = !sidebarToggle">
+                <svg class="w-8 h-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                  stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+              </button>
+              <!-- Hamburger Toggle BTN -->
+            </div>
+            <div class="relative w-full max-w-md sm:-ml-2">
+              <svg aria-hidden="true" viewBox="0 0 20 20" fill="currentColor"
+                class="absolute h-6 w-6 mt-2.5 ml-2 text-gray-400">
+                <path fill-rule="evenodd"
+                  d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                  clip-rule="evenodd" />
+              </svg>
+              <input type="text" role="search" placeholder="Search percel by tracking number"
+                class="py-2 pl-10 pr-4 w-full border-4 border-transparent placeholder-gray-400 focus:bg-gray-50 rounded-lg" />
+            </div>
+            <div class="flex flex-shrink-0 items-center ml-auto">
+              <button
+                class="relative p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-600 focus:bg-gray-100 focus:text-gray-600 rounded-full">
+                <span class="absolute top-0 right-0 h-2 w-2 mt-1 mr-2 bg-red-500 rounded-full"></span>
+                <span class="absolute top-0 right-0 h-2 w-2 mt-1 mr-2 bg-red-500 rounded-full animate-ping"></span>
+                <svg aria-hidden="true" fill="currentcolor" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                </svg>
+              </button>
+              <button
+                class="relative inline-flex gap-x-2 items-center p-2 hover:bg-gray-100 focus:bg-gray-100 rounded-lg"
+                @click="panel = !panel" @click.away="panel = false">
+                <span class="h-12 w-12 ml-2 sm:ml-3 mr-2 bg-gray-100 rounded-full overflow-hidden">
+                  <img src="assets/avater.png" alt="user profile photo" class="h-full w-full object-cover">
+                </span>
+                <div class="hidden md:flex md:flex-col md:items-end md:leading-tight">
+                  <span class="font-semibold">Nazmul Hossain</span>
                 </div>
-                <div class="flex-grow text-gray-800">
-                    <div class="flex items-center h-20 px-6 sm:px-10 bg-white">
-                        <div class="mr-8 cursor-pointer" @click="menu = !menu" >
-                            <svg class="w-8 h-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
-                            </svg>
-                        </div>
-                        <div class="relative w-full max-w-md sm:-ml-2">
-                            <svg aria-hidden="true" viewBox="0 0 20 20" fill="currentColor" class="absolute h-6 w-6 mt-2.5 ml-2 text-gray-400">
-                                <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
-                            </svg>
-                            <input type="text" role="search" placeholder="Search percel by tracking number" class="py-2 pl-10 pr-4 w-full border-4 border-transparent placeholder-gray-400 focus:bg-gray-50 rounded-lg" />
-                        </div>
-                        <div class="flex flex-shrink-0 items-center ml-auto">
-                            <button class="relative p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-600 focus:bg-gray-100 focus:text-gray-600 rounded-full">
-                                <span class="absolute top-0 right-0 h-2 w-2 mt-1 mr-2 bg-red-500 rounded-full"></span>
-                                <span class="absolute top-0 right-0 h-2 w-2 mt-1 mr-2 bg-red-500 rounded-full animate-ping"></span>
-                                <svg aria-hidden="true" fill="currentcolor" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                <svg aria-hidden="true" viewBox="0 0 20 20" fill="currentColor"
+                  class="hidden sm:block h-6 w-6 text-gray-300">
+                  <path fill-rule="evenodd"
+                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                    clip-rule="evenodd" />
+                </svg>
+              </button>
+              <div class="absolute top-20 bg-white border rounded-md p-2 w-56" x-show="panel" style="display:none">
+                <div class="p-2 hover:bg-blue-100 cursor-pointer">Profile</div>
+                <div class="p-2 hover:bg-blue-100 cursor-pointer">Messages</div>
+                <div class="p-2 hover:bg-blue-100 cursor-pointer">To-Do's</div>
+              </div>
+            </div>
+          </div>
+          <div class="p-8">
+            <p class="text-3xl font-semibold mb-2 ">Help?</p>
+            <div class="grid grid-cols-12 gap-10">
+                <div class="col-span-full lg:col-span-5 p-5 bg-white rounded-lg">
+                    <div class="space-y-6">
+                        <div class="flex gap-x-3">
+                            <div class="mt-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6 text-gray-400">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.324.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 011.37.49l1.296 2.247a1.125 1.125 0 01-.26 1.431l-1.003.827c-.293.24-.438.613-.431.992a6.759 6.759 0 010 .255c-.007.378.138.75.43.99l1.005.828c.424.35.534.954.26 1.43l-1.298 2.247a1.125 1.125 0 01-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.57 6.57 0 01-.22.128c-.331.183-.581.495-.644.869l-.213 1.28c-.09.543-.56.941-1.11.941h-2.594c-.55 0-1.02-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 01-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 01-1.369-.49l-1.297-2.247a1.125 1.125 0 01.26-1.431l1.004-.827c.292-.24.437-.613.43-.992a6.932 6.932 0 010-.255c.007-.378-.138-.75-.43-.99l-1.004-.828a1.125 1.125 0 01-.26-1.43l1.297-2.247a1.125 1.125 0 011.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.087.22-.128.332-.183.582-.495.644-.869l.214-1.281z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                                 </svg>
-                            </button>
-                            <button class="relative inline-flex gap-x-2 items-center p-2 hover:bg-gray-100 focus:bg-gray-100 rounded-lg" @click="panel = !panel" @click.away="panel = false">
-                                <span class="h-12 w-12 ml-2 sm:ml-3 mr-2 bg-gray-100 rounded-full overflow-hidden">
-                                    <img src="assets/avater.png" alt="user profile photo" class="h-full w-full object-cover">
-                                </span>
-                                <div class="hidden md:flex md:flex-col md:items-end md:leading-tight" >
-                                    <span class="font-semibold">Nazmul Hossain</span>
-                                </div>
-                                <svg aria-hidden="true" viewBox="0 0 20 20" fill="currentColor" class="hidden sm:block h-6 w-6 text-gray-300">
-                                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                                </svg> 
-                            </button>
-                            <div class="absolute top-20 bg-white border rounded-md p-2 w-56" x-show="panel" style="display:none">
-                                <div class="p-2 hover:bg-blue-100 cursor-pointer">Profile</div>
-                                <div class="p-2 hover:bg-blue-100 cursor-pointer">Messages</div>
-                                <div class="p-2 hover:bg-blue-100 cursor-pointer">To-Do's</div>
                             </div>
+                            <div class="space-y-4">
+                                <p class="text-xl font-semibold">Account</p>
+                                <p class="text-gray-400">reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>
+                            </div>                                     
+                        </div>
+                        <div class="flex gap-x-3">
+                            <div class="mt-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-gray-500">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0M3.124 7.5A8.969 8.969 0 015.292 3m13.416 0a8.969 8.969 0 012.168 4.5" />
+                                  </svg>
+                                  
+                            </div>
+                            <div class="space-y-4">
+                                <p class="text-xl font-semibold">Notifications</p>
+                                <p class="text-gray-400">reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>
+                            </div>                                     
+                        </div>
+                        <div class="flex gap-x-3">
+                            <div class="mt-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-gray-500">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
+                                  </svg>
+                            </div>
+                            <div class="space-y-4">
+                                <p class="text-xl font-semibold">Security</p>
+                                <p class="text-gray-500">reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>
+                            </div>                                     
+                        </div>
+                        <div class="flex gap-x-3">
+                            <div class="mt-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-gray-500">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+                                </svg>
+                            </div>
+                            <div class="space-y-4">
+                                <p class="text-xl font-semibold">Appearance</p>
+                                <p class="text-gray-400">reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>
+                            </div>                                     
+                        </div>
+                        <div class="flex gap-x-3">
+                            <div class="mt-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-gray-500">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+                                </svg>
+                            </div>
+                            <div class="space-y-4">
+                                <p class="text-xl font-semibold">Billing</p>
+                                <p class="text-gray-400">reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>
+                            </div>                                     
+                        </div>
+                        <div class="flex gap-x-3">
+                            <div class="mt-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-gray-500">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
+                                  </svg>
+                            </div>
+                            <div class="space-y-4">
+                                <p class="text-xl font-semibold">Integrations</p>
+                                <p class="text-gray-400">reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>
+                            </div>                                     
                         </div>
                     </div>
-                    <div class="p-8">
-                        <p class="text-3xl font-semibold mb-2 ">Help?</p>
-                        <div class="grid grid-cols-12 gap-10">
-                            <div class="lg:col-span-5 p-5 bg-white rounded-lg">
-                                <div class="space-y-6">
-                                    <div class="flex gap-x-3">
-                                        <div class="mt-1">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6 text-gray-400">
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.324.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 011.37.49l1.296 2.247a1.125 1.125 0 01-.26 1.431l-1.003.827c-.293.24-.438.613-.431.992a6.759 6.759 0 010 .255c-.007.378.138.75.43.99l1.005.828c.424.35.534.954.26 1.43l-1.298 2.247a1.125 1.125 0 01-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.57 6.57 0 01-.22.128c-.331.183-.581.495-.644.869l-.213 1.28c-.09.543-.56.941-1.11.941h-2.594c-.55 0-1.02-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 01-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 01-1.369-.49l-1.297-2.247a1.125 1.125 0 01.26-1.431l1.004-.827c.292-.24.437-.613.43-.992a6.932 6.932 0 010-.255c.007-.378-.138-.75-.43-.99l-1.004-.828a1.125 1.125 0 01-.26-1.43l1.297-2.247a1.125 1.125 0 011.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.087.22-.128.332-.183.582-.495.644-.869l.214-1.281z" />
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                            </svg>
-                                        </div>
-                                        <div class="space-y-4">
-                                            <p class="text-xl font-semibold">Account</p>
-                                            <p class="text-gray-400">reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>
-                                        </div>                                     
-                                    </div>
-                                    <div class="flex gap-x-3">
-                                        <div class="mt-1">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-gray-500">
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0M3.124 7.5A8.969 8.969 0 015.292 3m13.416 0a8.969 8.969 0 012.168 4.5" />
-                                              </svg>
-                                              
-                                        </div>
-                                        <div class="space-y-4">
-                                            <p class="text-xl font-semibold">Notifications</p>
-                                            <p class="text-gray-400">reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>
-                                        </div>                                     
-                                    </div>
-                                    <div class="flex gap-x-3">
-                                        <div class="mt-1">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-gray-500">
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
-                                              </svg>
-                                        </div>
-                                        <div class="space-y-4">
-                                            <p class="text-xl font-semibold">Security</p>
-                                            <p class="text-gray-500">reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>
-                                        </div>                                     
-                                    </div>
-                                    <div class="flex gap-x-3">
-                                        <div class="mt-1">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-gray-500">
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
-                                            </svg>
-                                        </div>
-                                        <div class="space-y-4">
-                                            <p class="text-xl font-semibold">Appearance</p>
-                                            <p class="text-gray-400">reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>
-                                        </div>                                     
-                                    </div>
-                                    <div class="flex gap-x-3">
-                                        <div class="mt-1">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-gray-500">
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
-                                            </svg>
-                                        </div>
-                                        <div class="space-y-4">
-                                            <p class="text-xl font-semibold">Billing</p>
-                                            <p class="text-gray-400">reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>
-                                        </div>                                     
-                                    </div>
-                                    <div class="flex gap-x-3">
-                                        <div class="mt-1">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-gray-500">
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
-                                              </svg>
-                                        </div>
-                                        <div class="space-y-4">
-                                            <p class="text-xl font-semibold">Integrations</p>
-                                            <p class="text-gray-400">reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>
-                                        </div>                                     
-                                    </div>
-                                </div>
-                                
-                            </div>
-                            <div class="lg:col-span-7 p-6 bg-white rounded-lg">
-                                <div>
-                                    <p class="text-3xl font-semibold">Account</p>
-                                    <p class="text-blue-700 font-semibold">Review and update your account details</p>
-                                    <p class="text-gray-400 my-4">Please Make sure that this detail are up to date as they will be used for bookings, and communications with the hotis</p>
-                                    <p class="text-green-500 font-semibold">>Learn More about that</p>
-                                </div>
-                               <div class="space-y-5 my-4 ">
-                                   <p class="text-2xl font-semibold">1.Edit Profile</p> 
-                                    <div class="flex gap-x-10">
-                                        <div class="relative w-full  sm:-ml-2">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentcolor" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="text-gray-500 absolute h-6 w-6 mt-2.5 ml-6 ">
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"></path>
-                                            </svg>
-                                            <input type="text" name="First Name" class="block w-full rounded-md border-2 border-black p-3 text-black shadow-sm placeholder:left-8 pl-14" placeholder="First Name">
-                                        </div>
-                                        <div class="relative w-full max-w-md sm:-ml-2">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentcolor" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="text-gray-500 absolute h-6 w-6 mt-2.5 ml-6 ">
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"></path>
-                                            </svg>
-                                            
-                                            <input type="text" name="city" id="city" class="block w-full rounded-md border-2 border-black p-3 text-black shadow-sm placeholder:left-8 pl-14" placeholder="Last Name">
-                                        </div>
-                                    </div>
-                                    <div class="flex justify-between gap-x-5">
-                                        <div class="z-10">
-                                            <div
-                                                x-data="{
-                                                    open: false,
-                                                    toggle() {
-                                                        if (this.open) {
-                                                            return this.close()
-                                                        }
+                    
+                </div>
+                <div class="col-span-full lg:col-span-7 p-6 bg-white rounded-lg">
+                  <div>
+                      <p class="text-3xl font-semibold">Account</p>
+                      <p class="text-blue-700 font-semibold">Review and update your account details</p>
+                      <p class="text-gray-400 my-4">Please Make sure that this detail are up to date as they will be used for bookings, and communications with the hotis</p>
+                      <p class="text-green-500 font-semibold">>Learn More about that</p>
+                  </div>
+                 <div class="space-y-5 my-4 ">
+                     <p class="text-2xl font-semibold">1.Edit Profile</p> 
+                      <div class="flex  flex-col lg:flex-row gap-10">
+                          <div class="relative w-full  sm:-ml-2">
+                              <svg xmlns="http://www.w3.org/2000/svg" fill="currentcolor" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="text-gray-500 absolute h-6 w-6 mt-2.5 ml-6 ">
+                                  <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"></path>
+                              </svg>
+                              <input type="text" name="First Name" class="block w-full rounded-md border-2 border-black p-3 text-black shadow-sm placeholder:left-8 pl-14" placeholder="First Name">
+                          </div>
+                          <div class="relative w-full max-w-md sm:-ml-2">
+                              <svg xmlns="http://www.w3.org/2000/svg" fill="currentcolor" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="text-gray-500 absolute h-6 w-6 mt-2.5 ml-6 ">
+                                  <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"></path>
+                              </svg>
+                              
+                              <input type="text" name="city" id="city" class="block w-full rounded-md border-2 border-black p-3 text-black shadow-sm placeholder:left-8 pl-14" placeholder="Last Name">
+                          </div>
+                      </div>
+                      <div class="flex flex-col lg:flex-row justify-between gap-x-5">
+                          <div class="z-10">
+                              <div
+                                  x-data="{
+                                      open: false,
+                                      toggle() {
+                                          if (this.open) {
+                                              return this.close()
+                                          }
 
-                                                        this.$refs.button.focus()
+                                          this.$refs.button.focus()
 
-                                                        this.open = true
-                                                    },
-                                                    close(focusAfter) {
-                                                        if (! this.open) return
+                                          this.open = true
+                                      },
+                                      close(focusAfter) {
+                                          if (! this.open) return
 
-                                                        this.open = false
+                                          this.open = false
 
-                                                        focusAfter && focusAfter.focus()
-                                                    }
-                                                }"
-                                                x-on:keydown.escape.prevent.stop="close($refs.button)"
-                                                x-on:focusin.window="! $refs.panel.contains($event.target) && close()"
-                                                x-id="['dropdown-button']"
-                                                class="relative"
-                                            >
-                                                <!-- Button -->
-                                                <button
-                                                    x-ref="button"
-                                                    x-on:click="toggle()"
-                                                    :aria-expanded="open"
-                                                    :aria-controls="$id('dropdown-button')"
-                                                    type="button"
-                                                    class="flex justify-between items-center gap-5 bg-white px-5 w-[19rem] py-3  rounded-md border-2 border-gray-500"
-                                                >
-                                                <div class="flex gap-x-2">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418" />
-                                                    </svg>
-                                                      
-                                                    
-                                                        <span>Country</span>
-                                                </div>
-                                                    <!-- Heroicon: chevron-down -->
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
-                                                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                                                    </svg>
-                                                </button>
+                                          focusAfter && focusAfter.focus()
+                                      }
+                                  }"
+                                  x-on:keydown.escape.prevent.stop="close($refs.button)"
+                                  x-on:focusin.window="! $refs.panel.contains($event.target) && close()"
+                                  x-id="['dropdown-button']"
+                                  class="relative"
+                              >
+                                  <!-- Button -->
+                                  <button
+                                      x-ref="button"
+                                      x-on:click="toggle()"
+                                      :aria-expanded="open"
+                                      :aria-controls="$id('dropdown-button')"
+                                      type="button"
+                                      class="flex justify-between items-center gap-5 bg-white px-5 w-[19rem] py-3  rounded-md border-2 border-gray-500"
+                                  >
+                                  <div class="flex gap-x-2">
+                                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                          <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418" />
+                                      </svg>
+                                        
+                                      
+                                          <span>Country</span>
+                                  </div>
+                                      <!-- Heroicon: chevron-down -->
+                                      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
+                                          <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                      </svg>
+                                  </button>
 
-                                                <!-- Panel -->
-                                                <div
-                                                    x-ref="panel"
-                                                    x-show="open"
-                                                    x-transition.origin.top.left
-                                                    x-on:click.outside="close($refs.button)"
-                                                    :id="$id('dropdown-button')"
-                                                    style="display: none;"
-                                                    class="absolute left-0 mt-2 w-full rounded-md bg-white shadow-md"
-                                                >
-                                                    <a href="#" class="flex items-center gap-2 w-full first-of-type:rounded-t-md last-of-type:rounded-b-md px-4 py-2.5 text-left text-sm hover:bg-gray-50 disabled:text-gray-500">
-                                                        Option- 01
-                                                    </a>
+                                  <!-- Panel -->
+                                  <div
+                                      x-ref="panel"
+                                      x-show="open"
+                                      x-transition.origin.top.left
+                                      x-on:click.outside="close($refs.button)"
+                                      :id="$id('dropdown-button')"
+                                      style="display: none;"
+                                      class="absolute left-0 mt-2 w-full rounded-md bg-white shadow-md"
+                                  >
+                                      <a href="#" class="flex items-center gap-2 w-full first-of-type:rounded-t-md last-of-type:rounded-b-md px-4 py-2.5 text-left text-sm hover:bg-gray-50 disabled:text-gray-500">
+                                          Option- 01
+                                      </a>
 
-                                                    <a href="#" class="flex items-center gap-2 w-full first-of-type:rounded-t-md last-of-type:rounded-b-md px-4 py-2.5 text-left text-sm hover:bg-gray-50 disabled:text-gray-500">
-                                                        Option- 02
-                                                    </a>
+                                      <a href="#" class="flex items-center gap-2 w-full first-of-type:rounded-t-md last-of-type:rounded-b-md px-4 py-2.5 text-left text-sm hover:bg-gray-50 disabled:text-gray-500">
+                                          Option- 02
+                                      </a>
 
-                                                    <a href="#" class="flex items-center gap-2 w-full first-of-type:rounded-t-md last-of-type:rounded-b-md px-4 py-2.5 text-left text-sm hover:bg-gray-50 disabled:text-gray-500">
-                                                        <span class="text-red-600">Option- 03</span>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="relative w-[19rem] sm:-ml-2">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentcolor" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="text-gray-500 absolute h-6 w-6 mt-2.5 ml-6 ">
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"></path>
-                                            </svg>
-                                            <input type="text" name="city" id="city" class="block w-full rounded-md border-2 border-black p-3 text-black shadow-sm placeholder:left-8 pl-14" placeholder="User Name">
-                                        </div>
-                                    </div>
-                                    <div class="flex gap-x-10 items-center">
-                                        <div class="relative w-full max-w-md sm:-ml-2">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentcolor" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="text-gray-500 absolute h-6 w-6 mt-2.5 ml-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"></path>
-                                            </svg>
-                                            <input type="text" name="contact" class="block w-full rounded-md border-2 border-black p-3 text-black shadow-sm placeholder:left-8 pl-14" placeholder="Personal Number">
-                                        </div>
-                                        <div class="relative w-full max-w-md sm:-ml-2">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentcolor" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="text-gray-500 absolute h-6 w-6 mt-2.5 ml-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"></path>
-                                            </svg>
-                                            <input type="text" name="contact" class="block w-full rounded-md border-2 border-black p-3 text-black shadow-sm placeholder:left-8 pl-14" placeholder="optional Number">
-                                        </div>
-                                    </div>
-                                    <div class="relative w-full sm:-ml-2">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="text-gray-500 top-1 absolute h-6 w-6 mt-2.5 ml-6">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"></path>
-                                        </svg>
-                                        <input type="text" name="city" class="block w-full rounded-md border-2 border-black p-3 text-black shadow-sm placeholder:left-8 pl-14" placeholder="E-mail Id">
-                                    </div>
-                                    <button class="py-3 w-full bg-indigo text-white rounded-lg">Save Changes</button>
-                                    <div class="space-y-5">
-                                        <p class="text-2xl font-semibold">2.Edit Password</p>
-                                        <div class="flex gap-x-10 items-center">
-                                            <div class="relative w-full max-w-md sm:-ml-2">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="text-gray-500 absolute h-6 w-6 mt-3 ml-6">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 5.25a3 3 0 013 3m3 0a6 6 0 01-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1121.75 8.25z" />
-                                                </svg>
-                                                <input type="text" name="contact" class="block w-full rounded-md border-2 border-black p-3 text-black shadow-sm placeholder:left-8 pl-14" placeholder="Old Password">
-                                            </div>
-                                            <div class="relative w-full max-w-md sm:-ml-2">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="text-gray-500 absolute h-6 w-6 mt-3 ml-6">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 5.25a3 3 0 013 3m3 0a6 6 0 01-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1121.75 8.25z" />
-                                                </svg>
-                                                <input type="text" name="contact" class="block w-full rounded-md border-2 border-black p-3 text-black shadow-sm placeholder:left-8 pl-14" placeholder="New Password">
-                                            </div>
-                                        </div>
-                                        <div class="relative w-[19rem] sm:-ml-2">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="text-gray-500 absolute h-6 w-6 mt-3 ml-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 5.25a3 3 0 013 3m3 0a6 6 0 01-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1121.75 8.25z" />
-                                            </svg>
-                                            <input type="text" name="contact" class="block w-full rounded-md border-2 border-black p-3 text-black shadow-sm placeholder:left-8 pl-14" placeholder="Confirm Password">
-                                        </div>
-                                        <button class="py-3 w-full bg-indigo text-white rounded-lg">Save Changes</button>
-                                    </div>
-                               </div>
-                            </div>
-                        </div>
-                    </div>
+                                      <a href="#" class="flex items-center gap-2 w-full first-of-type:rounded-t-md last-of-type:rounded-b-md px-4 py-2.5 text-left text-sm hover:bg-gray-50 disabled:text-gray-500">
+                                          <span class="text-red-600">Option- 03</span>
+                                      </a>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="relative w-[19rem] sm:-ml-2">
+                              <svg xmlns="http://www.w3.org/2000/svg" fill="currentcolor" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="text-gray-500 absolute h-6 w-6 mt-2.5 ml-6 ">
+                                  <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"></path>
+                              </svg>
+                              <input type="text" name="city" id="city" class="block w-full rounded-md border-2 border-black p-3 text-black shadow-sm placeholder:left-8 pl-14" placeholder="User Name">
+                          </div>
+                      </div>
+                      <div class="flex gap-x-10 items-center">
+                          <div class="relative w-full max-w-md sm:-ml-2">
+                              <svg xmlns="http://www.w3.org/2000/svg" fill="currentcolor" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="text-gray-500 absolute h-6 w-6 mt-2.5 ml-6">
+                                  <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"></path>
+                              </svg>
+                              <input type="text" name="contact" class="block w-full rounded-md border-2 border-black p-3 text-black shadow-sm placeholder:left-8 pl-14" placeholder="Personal Number">
+                          </div>
+                          <div class="relative w-full max-w-md sm:-ml-2">
+                              <svg xmlns="http://www.w3.org/2000/svg" fill="currentcolor" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="text-gray-500 absolute h-6 w-6 mt-2.5 ml-6">
+                                  <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"></path>
+                              </svg>
+                              <input type="text" name="contact" class="block w-full rounded-md border-2 border-black p-3 text-black shadow-sm placeholder:left-8 pl-14" placeholder="optional Number">
+                          </div>
+                      </div>
+                      <div class="relative w-full sm:-ml-2">
+                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="text-gray-500 top-1 absolute h-6 w-6 mt-2.5 ml-6">
+                              <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"></path>
+                          </svg>
+                          <input type="text" name="city" class="block w-full rounded-md border-2 border-black p-3 text-black shadow-sm placeholder:left-8 pl-14" placeholder="E-mail Id">
+                      </div>
+                      <button class="py-3 w-full bg-indigo text-white rounded-lg">Save Changes</button>
+                      <div class="space-y-5">
+                          <p class="text-2xl font-semibold">2.Edit Password</p>
+                          <div class="flex gap-x-10 items-center">
+                              <div class="relative w-full max-w-md sm:-ml-2">
+                                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="text-gray-500 absolute h-6 w-6 mt-3 ml-6">
+                                      <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 5.25a3 3 0 013 3m3 0a6 6 0 01-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1121.75 8.25z" />
+                                  </svg>
+                                  <input type="text" name="contact" class="block w-full rounded-md border-2 border-black p-3 text-black shadow-sm placeholder:left-8 pl-14" placeholder="Old Password">
+                              </div>
+                              <div class="relative w-full max-w-md sm:-ml-2">
+                                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="text-gray-500 absolute h-6 w-6 mt-3 ml-6">
+                                      <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 5.25a3 3 0 013 3m3 0a6 6 0 01-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1121.75 8.25z" />
+                                  </svg>
+                                  <input type="text" name="contact" class="block w-full rounded-md border-2 border-black p-3 text-black shadow-sm placeholder:left-8 pl-14" placeholder="New Password">
+                              </div>
+                          </div>
+                          <div class="relative w-[19rem] sm:-ml-2">
+                              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="text-gray-500 absolute h-6 w-6 mt-3 ml-6">
+                                  <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 5.25a3 3 0 013 3m3 0a6 6 0 01-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1121.75 8.25z" />
+                              </svg>
+                              <input type="text" name="contact" class="block w-full rounded-md border-2 border-black p-3 text-black shadow-sm placeholder:left-8 pl-14" placeholder="Confirm Password">
+                          </div>
+                          <button class="py-3 w-full bg-indigo text-white rounded-lg">Save Changes</button>
+                      </div>
                  </div>
-            </section>
-        </main>
-    </body>
+              </div>
+            </div>
+        </div>
+        </div>
+      </main>
+      <!-- ===== Main Content End ===== -->
+  </div>
+</body>
+
 </html>
